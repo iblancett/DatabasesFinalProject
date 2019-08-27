@@ -1,4 +1,4 @@
-# DatabasesFinalProject
+# PetFinder Database with SQLAlchemy
 Final Project for Databases SP19 at Olin College
 
 SQL Alchemy Introduction
