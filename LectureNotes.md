@@ -1,5 +1,6 @@
 # Object-Relational Mapping
 Isa Blancett
+
 iblancett@olin.edu
 
 The code used was adapted from the SQLAlchemy Tutorial.
