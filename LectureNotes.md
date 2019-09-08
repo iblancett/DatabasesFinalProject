@@ -6,7 +6,51 @@ The code used was adapted from the SQLAlchemy Tutorial.
 https://docs.sqlalchemy.org/en/13/orm/tutorial.html
 
 ## What is ORM?
-Definition of ORM
+- A technique for storing, retrieving, updating, and deleting from an object-oriented program in a relational database
+- Uses a data layer to manage translation between the OO and relational model
+- This data layer is usually a library written in the OO
+
+## Why use an ORM?
+Answer: Many Reasons!
+
+### Alternatives
+
+Example of lower-level python interfaces (DB-API):
+```
+sql = ”INSERT INTO user(user_name, password) VALUES (%s,%s)”
+cursor = conn.cursor()
+cursor.execute(sql, (‘gala’, ‘labrador’))
+```
+
+Example of the same instructions for Oracle DB-API:
+```
+sql = ”INSERT INTO user(user_name, password) VALUES (:1, :2)”
+cursor = conn.cursor()
+cursor.execute(sql, ‘gala’, ‘labrador’)
+```
+
+Problems:
+- unnecessary amount of code
+- prone to errors
+- string manipulation makes app vulnerable to injection attacks
+- generating explicit string makes migration to different database difficult
+
+With SQLALchemy:
+```
+statement = user_table.insert(user_name=’gala’, password=’labrador’)
+statement.execute()
+```
+
+### Benefits
+- Write queries with a Pythonic expression builder
+```
+statement = user_table.select(and_(
+    user_table.c.created >= date(2015,1,1),
+    user_table.c.created <   date(2016,1,1)),
+result = statement.execute()
+```
+
+- Automatically populate databases as Python objects change
 
 ## SQLAlchemy Implementation
 
@@ -158,4 +202,3 @@ These commands show that, yes, the owners now have a relationship with their pet
 <Owner(owner='Joan Blancett')>
 <Pet(name='Piper', type='Dog', age=10, breed='Border Collie')>
 ```
-
